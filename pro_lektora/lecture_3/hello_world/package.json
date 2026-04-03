@@ -1,0 +1,14 @@
+{
+	"name": "hello-world",
+	"version": "1.0.0",
+	"type": "module",
+	"scripts": {
+		"start": "node index.js"
+	},
+	"dependencies": {
+		"express": "^4.22.1"
+	},
+	"devDependencies": {
+		"prettier": "^3.0.0"
+	}
+}
