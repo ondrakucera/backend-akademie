@@ -5,6 +5,7 @@ export function createDinosaurRouter({ dinosaurController }) {
 
 	router.get("/dinosaurs", dinosaurController.list);
 	router.get("/dinosaurs/:id", dinosaurController.getById);
+	router.delete("/dinosaurs/:id", dinosaurController.deleteById);
 
 	return router;
 }

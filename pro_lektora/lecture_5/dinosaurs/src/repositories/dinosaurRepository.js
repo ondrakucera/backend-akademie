@@ -21,5 +21,9 @@ export function createDinosaurRepository({ client }) {
 			}
 			return mapRowToDinosaurDto(result.rows[0]);
 		},
+		async deleteDinosaurById(id) {
+			const result = await client.query("DELETE FROM dinosaur WHERE id = $1", [id]);
+			return result.rowCount > 0;
+		},
 	};
 }

@@ -12,5 +12,11 @@ export function createDinosaurService({ dinosaurRepository }) {
 			}
 			return dinosaur;
 		},
+		async deleteDinosaurById(id) {
+			const deleted = await dinosaurRepository.deleteDinosaurById(id);
+			if (!deleted) {
+				throw new NotFoundError(`Dinosaur with id ${id} not found`);
+			}
+		},
 	};
 }

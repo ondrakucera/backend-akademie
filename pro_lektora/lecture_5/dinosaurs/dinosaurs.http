@@ -11,3 +11,15 @@ http://localhost:3000/dinosaurs/6
 ###
 
 http://localhost:3000/dinosaurs/whatever
+
+###
+
+DELETE http://localhost:3000/dinosaurs/1
+
+###
+
+DELETE http://localhost:3000/dinosaurs/999999
+
+###
+
+DELETE http://localhost:3000/dinosaurs/whatever
