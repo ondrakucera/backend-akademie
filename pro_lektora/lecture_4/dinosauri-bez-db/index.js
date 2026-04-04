@@ -65,4 +65,10 @@ app.post("/dinosaurs", (req, res) => {
 	res.json(newId);
 });
 
+app.delete("/dinosaurs/:id", (req, res) => {
+	const index = DINOSAURS.findIndex((dinosaur) => dinosaur.id === Number(req.params.id));
+	DINOSAURS.splice(index, 1);
+	res.status(204).send();
+});
+
 app.listen(3000);

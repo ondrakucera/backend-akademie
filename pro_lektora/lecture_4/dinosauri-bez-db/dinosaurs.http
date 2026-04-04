@@ -43,3 +43,7 @@ Content-Type: application/json
 	"period": "křída",
 	"wikipediaAddress": "https://cs.wikipedia.org/wiki/Protoceratops"
 }
+
+###
+
+DELETE http://localhost:3000/dinosaurs/6
