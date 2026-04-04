@@ -3,13 +3,15 @@
 	"version": "1.0.0",
 	"type": "module",
 	"scripts": {
-		"start": "node src/index.js"
+		"start": "node src/index.js",
+		"lint": "eslint ."
 	},
 	"dependencies": {
 		"express": "^4.22.1",
 		"pg": "^8.11.3"
 	},
 	"devDependencies": {
+		"eslint": "^10.0.0",
 		"@eslint/js": "^10.0.1",
 		"@eslint/json": "^1.2.0",
 		"globals": "^17.4.0",
