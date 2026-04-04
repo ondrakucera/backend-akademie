@@ -71,4 +71,13 @@ app.delete("/dinosaurs/:id", (req, res) => {
 	res.status(204).send();
 });
 
+app.put("/dinosaurs/:id", (req, res) => {
+	const index = DINOSAURS.findIndex((dinosaur) => dinosaur.id === Number(req.params.id));
+	DINOSAURS[index] = {
+		...req.body,
+		id: Number(req.params.id),
+	};
+	res.status(204).send();
+});
+
 app.listen(3000);

@@ -47,3 +47,15 @@ Content-Type: application/json
 ###
 
 DELETE http://localhost:3000/dinosaurs/6
+
+###
+
+PUT http://localhost:3000/dinosaurs/1
+Content-Type: application/json
+
+{
+	"name": "Tyrannosaurus",
+	"description": "Tyrannosaurus („tyranský ještěr“ – odvozeno ze starořeckého τύραννος – tyrannos = vládce, resp. krutovládce; v případě druhu T. rex pak latinského rex = král) byl jeden z největších masožravých dinosaurů (teropodů) a zároveň jedním z největších suchozemských predátorů všech dob.",
+	"period": "křída",
+	"wikipediaAddress": "https://en.wikipedia.org/wiki/Tyrannosaurus"
+}
