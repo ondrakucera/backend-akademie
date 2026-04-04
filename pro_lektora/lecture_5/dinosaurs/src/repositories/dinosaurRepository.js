@@ -14,5 +14,12 @@ export function createDinosaurRepository({ client }) {
 			const result = await client.query("SELECT * FROM dinosaur ORDER BY id");
 			return result.rows.map(mapRowToDinosaurDto);
 		},
+		async getDinosaurById(id) {
+			const result = await client.query("SELECT * FROM dinosaur WHERE id = $1", [id]);
+			if (result.rows.length === 0) {
+				return null;
+			}
+			return mapRowToDinosaurDto(result.rows[0]);
+		},
 	};
 }

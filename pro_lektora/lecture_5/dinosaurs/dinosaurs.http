@@ -1,1 +1,13 @@
 http://localhost:3000/dinosaurs
+
+###
+
+http://localhost:3000/dinosaurs/1
+
+###
+
+http://localhost:3000/dinosaurs/6
+
+###
+
+http://localhost:3000/dinosaurs/whatever
