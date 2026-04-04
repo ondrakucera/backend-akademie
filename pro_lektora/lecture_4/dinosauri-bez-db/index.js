@@ -44,6 +44,7 @@ const DINOSAURS = [
 ];
 
 const app = express();
+app.use(express.json());
 
 app.get("/dinosaurs", (req, res) => {
 	res.json(DINOSAURS);
@@ -52,6 +53,16 @@ app.get("/dinosaurs", (req, res) => {
 app.get("/dinosaurs/:id", (req, res) => {
 	const dinosaur = DINOSAURS.find((dinosaur) => dinosaur.id === Number(req.params.id));
 	res.json(dinosaur);
+});
+
+app.post("/dinosaurs", (req, res) => {
+	const newId = Math.max(...DINOSAURS.map((dinosaur) => dinosaur.id)) + 1;
+	const newDinosaur = {
+		...req.body,
+		id: newId,
+	};
+	DINOSAURS.push(newDinosaur);
+	res.json(newId);
 });
 
 app.listen(3000);
