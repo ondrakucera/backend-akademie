@@ -1,0 +1,20 @@
+{
+	"name": "employees-cli",
+	"version": "1.0.0",
+	"type": "module",
+	"scripts": {
+		"lint": "eslint ."
+	},
+	"dependencies": {
+		"dotenv": "^17.4.2",
+		"pg": "^8.11.3",
+		"prompt-sync": "^4.2.0"
+	},
+	"devDependencies": {
+		"@eslint/js": "^10.0.1",
+		"@eslint/json": "^1.2.0",
+		"eslint": "^10.0.0",
+		"globals": "^17.4.0",
+		"prettier": "^3.0.0"
+	}
+}
