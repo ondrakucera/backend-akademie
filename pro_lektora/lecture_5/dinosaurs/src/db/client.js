@@ -8,3 +8,5 @@ export function createPgClient() {
 		user: "ondra",
 	});
 }
+
+export const pgClient = createPgClient();

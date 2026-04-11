@@ -1,4 +1,5 @@
 import { ValidationError } from "../errors/appError.js";
+import { dinosaurService } from "../services/dinosaurService.js";
 
 function parseDinosaurId(rawId) {
 	const id = Number(rawId);
@@ -33,51 +34,49 @@ function parseDinosaurBody(body) {
 	};
 }
 
-export function createDinosaurController({ dinosaurService }) {
-	return {
-		async list(request, response) {
-			const dinosaurs = await dinosaurService.listDinosaurs();
-			response.json(dinosaurs);
-		},
-		async create(request, response, next) {
-			try {
-				const dinosaur = parseDinosaurBody(request.body);
-				const id = await dinosaurService.createDinosaur(dinosaur);
-				response.status(201).json(id);
-			} catch (error) {
-				next(error);
-			}
-		},
-		async getById(request, response, next) {
-			try {
-				const id = parseDinosaurId(request.params.id);
+export const dinosaurController = {
+	async list(request, response) {
+		const dinosaurs = await dinosaurService.listDinosaurs();
+		response.json(dinosaurs);
+	},
+	async create(request, response, next) {
+		try {
+			const dinosaur = parseDinosaurBody(request.body);
+			const id = await dinosaurService.createDinosaur(dinosaur);
+			response.status(201).json(id);
+		} catch (error) {
+			next(error);
+		}
+	},
+	async getById(request, response, next) {
+		try {
+			const id = parseDinosaurId(request.params.id);
 
-				const dinosaur = await dinosaurService.getDinosaurById(id);
-				response.json(dinosaur);
-			} catch (error) {
-				next(error);
-			}
-		},
-		async updateById(request, response, next) {
-			try {
-				const id = parseDinosaurId(request.params.id);
-				const dinosaur = parseDinosaurBody(request.body);
+			const dinosaur = await dinosaurService.getDinosaurById(id);
+			response.json(dinosaur);
+		} catch (error) {
+			next(error);
+		}
+	},
+	async updateById(request, response, next) {
+		try {
+			const id = parseDinosaurId(request.params.id);
+			const dinosaur = parseDinosaurBody(request.body);
 
-				await dinosaurService.updateDinosaurById(id, dinosaur);
-				response.status(204).send();
-			} catch (error) {
-				next(error);
-			}
-		},
-		async deleteById(request, response, next) {
-			try {
-				const id = parseDinosaurId(request.params.id);
+			await dinosaurService.updateDinosaurById(id, dinosaur);
+			response.status(204).send();
+		} catch (error) {
+			next(error);
+		}
+	},
+	async deleteById(request, response, next) {
+		try {
+			const id = parseDinosaurId(request.params.id);
 
-				await dinosaurService.deleteDinosaurById(id);
-				response.status(204).send();
-			} catch (error) {
-				next(error);
-			}
-		},
-	};
-}
+			await dinosaurService.deleteDinosaurById(id);
+			response.status(204).send();
+		} catch (error) {
+			next(error);
+		}
+	},
+};

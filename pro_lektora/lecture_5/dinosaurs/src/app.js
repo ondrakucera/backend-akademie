@@ -1,13 +1,11 @@
 import express from "express";
-
 import { createErrorMiddleware } from "./middleware/errorMiddleware.js";
+import { dinosaurRouter } from "./routes/dinosaurRoutes.js";
 
-export function createApp({ dinosaurRouter }) {
-	const app = express();
+const app = express();
 
-	app.use(express.json());
-	app.use(dinosaurRouter);
-	app.use(createErrorMiddleware());
+app.use(express.json());
+app.use(dinosaurRouter);
+app.use(createErrorMiddleware());
 
-	return app;
-}
+export { app };
