@@ -1,5 +1,5 @@
-import { ValidationError } from "../errors/appError.js";
-import { dinosaurService } from "../services/dinosaurService.js";
+import { DinosaurNotFoundError, ValidationError } from "../errors/appError.js";
+import { dinosaurRepository } from "../repositories/dinosaurRepository.js";
 
 function parseDinosaurId(rawId) {
 	const id = Number(rawId);
@@ -35,14 +35,18 @@ function parseDinosaurBody(body) {
 }
 
 export const dinosaurController = {
-	async list(request, response) {
-		const dinosaurs = await dinosaurService.listDinosaurs();
-		response.json(dinosaurs);
+	async list(request, response, next) {
+		try {
+			const dinosaurs = await dinosaurRepository.listDinosaurs();
+			response.json(dinosaurs);
+		} catch (error) {
+			next(error);
+		}
 	},
 	async create(request, response, next) {
 		try {
 			const dinosaur = parseDinosaurBody(request.body);
-			const id = await dinosaurService.createDinosaur(dinosaur);
+			const id = await dinosaurRepository.createDinosaur(dinosaur);
 			response.status(201).json(id);
 		} catch (error) {
 			next(error);
@@ -51,8 +55,10 @@ export const dinosaurController = {
 	async getById(request, response, next) {
 		try {
 			const id = parseDinosaurId(request.params.id);
-
-			const dinosaur = await dinosaurService.getDinosaurById(id);
+			const dinosaur = await dinosaurRepository.getDinosaurById(id);
+			if (!dinosaur) {
+				throw new DinosaurNotFoundError(id);
+			}
 			response.json(dinosaur);
 		} catch (error) {
 			next(error);
@@ -62,8 +68,10 @@ export const dinosaurController = {
 		try {
 			const id = parseDinosaurId(request.params.id);
 			const dinosaur = parseDinosaurBody(request.body);
-
-			await dinosaurService.updateDinosaurById(id, dinosaur);
+			const updated = await dinosaurRepository.updateDinosaurById(id, dinosaur);
+			if (!updated) {
+				throw new DinosaurNotFoundError(id);
+			}
 			response.status(204).send();
 		} catch (error) {
 			next(error);
@@ -72,8 +80,10 @@ export const dinosaurController = {
 	async deleteById(request, response, next) {
 		try {
 			const id = parseDinosaurId(request.params.id);
-
-			await dinosaurService.deleteDinosaurById(id);
+			const deleted = await dinosaurRepository.deleteDinosaurById(id);
+			if (!deleted) {
+				throw new DinosaurNotFoundError(id);
+			}
 			response.status(204).send();
 		} catch (error) {
 			next(error);
