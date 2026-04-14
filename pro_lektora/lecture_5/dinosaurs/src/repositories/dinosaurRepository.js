@@ -10,7 +10,6 @@ function mapRowToDinosaurDto(row) {
 	};
 }
 
-
 export const dinosaurRepository = {
 	async listDinosaurs() {
 		const result = await pgClient.query("SELECT * FROM dinosaur ORDER BY id");
