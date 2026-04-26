@@ -1,0 +1,64 @@
+http://localhost:3000/students
+
+###
+
+http://localhost:3000/students/1
+
+###
+
+http://localhost:3000/students/999999
+
+###
+
+http://localhost:3000/students/whatever
+
+###
+
+POST http://localhost:3000/students
+Content-Type: application/json
+
+{
+	"firstName": "Neville",
+	"lastName": "Longbottom",
+	"gender": "male",
+	"year": 2,
+	"house": "Gryffindor"
+}
+
+###
+
+PUT http://localhost:3000/students/1
+Content-Type: application/json
+
+{
+	"firstName": "Harry",
+	"lastName": "Potter",
+	"gender": "male",
+	"year": 3,
+	"house": "Gryffindor"
+}
+
+###
+
+PUT http://localhost:3000/students/999999
+Content-Type: application/json
+
+{
+	"firstName": "Nonexistent",
+	"lastName": "Student",
+	"gender": "unknown",
+	"year": 1,
+	"house": "Nowhere"
+}
+
+###
+
+DELETE http://localhost:3000/students/7
+
+###
+
+DELETE http://localhost:3000/students/999999
+
+###
+
+DELETE http://localhost:3000/students/whatever
