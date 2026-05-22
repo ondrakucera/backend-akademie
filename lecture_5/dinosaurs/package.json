@@ -1,0 +1,21 @@
+{
+	"name": "dinosaurs",
+	"version": "1.0.0",
+	"type": "module",
+	"scripts": {
+		"start": "node src/index.js"
+	},
+	"dependencies": {
+		"dotenv": "^17.4.2",
+		"express": "^5.1.0",
+		"pg": "^8.11.3",
+		"zod": "^3.25.76"
+	},
+	"devDependencies": {
+		"@eslint/js": "^10.0.1",
+		"@eslint/json": "^1.2.0",
+		"eslint": "^10.0.0",
+		"globals": "^17.4.0",
+		"prettier": "^3.0.0"
+	}
+}
