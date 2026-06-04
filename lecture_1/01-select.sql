@@ -33,5 +33,43 @@ SELECT * FROM accounts WHERE currency NOT IN ('CZK', 'USD');
 -- Toto by vypsalo uzivatele, kteri nemaji email
 SELECT * FROM clients WHERE email IS NULL;
 
+-- Opakem je IS NOT NULL
+SELECT * FROM clients WHERE email IS NOT NULL;
+
 -- Vyhledani zaznamu podle casti hodnoty
 SELECT * FROM clients WHERE name LIKE 'Ja%';
+
+-- Toto je case insensitivni varianta
+SELECT * FROM clients WHERE name ILIKE 'ja%';
+
+-- Vypiseme ucty a seraidme je podle balance
+SELECT * FROM accounts ORDER BY balance ASC;
+-- Sestupne
+SELECT * FROM accounts ORDER BY balance DESC;
+
+-- Muzeme uvest i sekundarni razeni
+SELECT * FROM accounts ORDER BY currency DESC, balance ASC;
+
+-- LIMIT nam omezi pocet vysledku
+SELECT * FROM accounts ORDER BY currency DESC, balance ASC LIMIT 5;
+-- Offset rika kolik zazanmu se ma preskocit
+SELECT * FROM accounts ORDER BY currency DESC, balance ASC LIMIT 5 OFFSET 2;
+
+-- Toto vam vypise hodnoty sloupecku, odstrani duplicty
+SELECT DISTINCT(currency) FROM accounts;
+
+-- Vypiseme karty
+SELECT * FROM cards;
+
+-- Toto je INNER JOIN dvou tabulek, ktere se spojili na zaklade FK
+SELECT *  FROM cards JOIN clients ON cards.client_id = clients.id;
+
+-- Pri joinovani mohou nektere nazvy sloupecku byt duplicitni
+-- Sloupecky muzeme oaliasovat libovolnym nazvem
+SELECT cards.id AS id_karty, clients.id AS id_klienta FROM cards JOIN clients ON cards.client_id = clients.id;
+
+-- Zkuste si napsat vlastni join, kde leva tabulka bude accounts a prava tabulka bude cards
+SELECT * FROM accounts JOIN cards ON accounts.id = cards.account_id;
+
+-- LEFT JOINN vypise komplete celou levou tabulku a pak k tomu dohleda hodnoty z prave tabulky
+SELECT * FROM accounts LEFT JOIN cards ON accounts.id = cards.account_id;
