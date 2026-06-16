@@ -38,3 +38,14 @@ dinosaurRouter.put("/dinosaurs/:id", async (request, response) => {
 	}
 	response.sendStatus(204);
 });
+
+// Delet dinosaur by id.
+dinosaurRouter.delete("/dinosaurs/:id", async (request, response) => {
+	const id = Number(request.params.id);
+	const result = await dinosaurRepository.deleteDinosaurById(id);
+	if (!result) {
+		response.sendStatus(404);
+		return;
+	}
+	response.sendStatus(204);
+});

@@ -84,4 +84,19 @@ export const dinosaurRepository = {
 		);
 		return result.rowCount > 0;
 	},
+
+	/**
+	 * Delete dinosaur by id.
+	 *
+	 * @param {number} id
+	 *
+	 * @returns {Promise<boolean>}
+	 */
+	async deleteDinosaurById(id) {
+		const result = await client.query(
+			"DELETE FROM dinosaur WHERE id = $1",
+			[id],
+		);
+		return result.rowCount > 0;
+	},
 };
