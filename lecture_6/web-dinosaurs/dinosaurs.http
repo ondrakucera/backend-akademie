@@ -1,0 +1,83 @@
+http://localhost:3000/dinosaurs
+
+###
+
+http://localhost:3000/dinosaurs/1
+
+###
+
+http://localhost:3000/dinosaurs/6
+
+###
+
+http://localhost:3000/dinosaurs/whatever
+
+###
+
+POST http://localhost:3000/dinosaurs
+Content-Type: application/json
+
+{
+	"name": "Triceratops",
+	"description": "Triceratops (neboli „třírohá tvář“) byl rod obřího rohatého dinosaura, žijícího v období pozdní svrchní křídy na západě Severní Ameriky."
+}
+
+###
+
+POST http://localhost:3000/dinosaurs
+Content-Type: application/json
+
+{
+	"name": "Supersaurus",
+	"description": "Supersaurus („Ohromný ještěr“) byl rod obřího diplodokidního dinosaura, objevený v americkém státě Colorado v roce 1972 spolu s fosiliemi jiného obřího sauropoda rodu Brachiosaurus.",
+	"period": "jura",
+	"wikipediaAddress": "https://cs.wikipedia.org/wiki/Supersaurus"
+}
+
+###
+
+POST http://localhost:3000/dinosaurs
+Content-Type: application/json
+
+{
+	"name": "Protoceratops",
+	"description": "Protoceratops („první rohatá tvář“) byl malý rohatý dinosaurus (ceratops), který žil v období svrchní křídy, asi před 80 až 75 miliony let.",
+	"period": "křída",
+	"wikipediaAddress": "https://cs.wikipedia.org/wiki/Protoceratops"
+}
+
+###
+
+PUT http://localhost:3000/dinosaurs/1
+Content-Type: application/json
+
+{
+	"name": "Tyrannosaurus",
+	"description": "Tyrannosaurus („tyranský ještěr“ – odvozeno ze starořeckého τύραννος – tyrannos = vládce, resp. krutovládce; v případě druhu T. rex pak latinského rex = král) byl jeden z největších masožravých dinosaurů (teropodů) a zároveň jedním z největších suchozemských predátorů všech dob.",
+	"period": "křída",
+	"wikipediaAddress": "https://en.wikipedia.org/wiki/Tyrannosaurus"
+}
+
+###
+
+PUT http://localhost:3000/dinosaurs/999999
+Content-Type: application/json
+
+{
+	"name": "Neexistující",
+	"description": "Neexistující nemá žádný popis.",
+	"period": "křída",
+	"wikipediaAddress": "https://cs.wikipedia.org"
+}
+
+###
+
+DELETE http://localhost:3000/dinosaurs/8
+
+###
+
+DELETE http://localhost:3000/dinosaurs/999999
+
+###
+
+DELETE http://localhost:3000/dinosaurs/whatever

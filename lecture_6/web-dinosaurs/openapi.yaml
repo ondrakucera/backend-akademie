@@ -1,0 +1,177 @@
+openapi: 3.1.0
+info:
+  title: Dinosaurs API
+  version: 1.0.0
+  description: API for CRUD operations over a dinosaur database.
+servers:
+  - url: http://localhost:3000
+paths:
+  /dinosaurs:
+    get:
+      summary: List dinosaurs
+      operationId: listDinosaurs
+      tags:
+        - Dinosaurs
+      responses:
+        "200":
+          description: List of dinosaurs ordered by ID.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Dinosaur"
+              examples:
+                dinosaurs:
+                  value:
+                    - id: 1
+                      name: Tyrannosaurus
+                      description: Large carnivorous theropod dinosaur.
+                      period: Cretaceous
+                      wikipediaAddress: https://en.wikipedia.org/wiki/Tyrannosaurus
+    post:
+      summary: Create a dinosaur
+      operationId: createDinosaur
+      tags:
+        - Dinosaurs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DinosaurInput"
+            examples:
+              dinosaur:
+                value:
+                  name: Tyrannosaurus
+                  description: Large carnivorous theropod dinosaur.
+                  period: Cretaceous
+                  wikipediaAddress: https://en.wikipedia.org/wiki/Tyrannosaurus
+      responses:
+        "200":
+          description: ID of the created dinosaur.
+          content:
+            application/json:
+              schema:
+                type: integer
+                minimum: 1
+              examples:
+                createdId:
+                  value: 1
+  /dinosaurs/{id}:
+    parameters:
+      - $ref: "#/components/parameters/DinosaurId"
+    get:
+      summary: Get a dinosaur by ID
+      operationId: getDinosaurById
+      tags:
+        - Dinosaurs
+      responses:
+        "200":
+          description: Dinosaur detail.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dinosaur"
+              examples:
+                dinosaur:
+                  value:
+                    id: 1
+                    name: Tyrannosaurus
+                    description: Large carnivorous theropod dinosaur.
+                    period: Cretaceous
+                    wikipediaAddress: https://en.wikipedia.org/wiki/Tyrannosaurus
+        "404":
+          description: Dinosaur was not found.
+    put:
+      summary: Update a dinosaur
+      operationId: updateDinosaurById
+      tags:
+        - Dinosaurs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DinosaurInput"
+            examples:
+              dinosaur:
+                value:
+                  name: Tyrannosaurus rex
+                  description: Updated dinosaur description.
+                  period: Cretaceous
+                  wikipediaAddress: https://en.wikipedia.org/wiki/Tyrannosaurus
+      responses:
+        "204":
+          description: Dinosaur was updated successfully.
+        "404":
+          description: Dinosaur was not found.
+    delete:
+      summary: Delete a dinosaur
+      operationId: deleteDinosaurById
+      tags:
+        - Dinosaurs
+      responses:
+        "204":
+          description: Dinosaur was deleted successfully.
+        "404":
+          description: Dinosaur was not found.
+components:
+  parameters:
+    DinosaurId:
+      name: id
+      in: path
+      required: true
+      description: Dinosaur ID.
+      schema:
+        type: integer
+        minimum: 1
+  schemas:
+    DinosaurInput:
+      type: object
+      required:
+        - name
+        - description
+        - period
+        - wikipediaAddress
+      properties:
+        name:
+          type: string
+          maxLength: 256
+        description:
+          type: string
+          maxLength: 4096
+        period:
+          type: string
+          maxLength: 32
+        wikipediaAddress:
+          type: string
+          format: uri
+          maxLength: 4096
+      additionalProperties: false
+    Dinosaur:
+      type: object
+      required:
+        - id
+        - name
+        - description
+        - period
+        - wikipediaAddress
+      properties:
+        id:
+          type: integer
+          minimum: 1
+        name:
+          type: string
+          maxLength: 256
+        description:
+          type: string
+          maxLength: 4096
+        period:
+          type: string
+          maxLength: 32
+        wikipediaAddress:
+          type: string
+          format: uri
+          maxLength: 4096
+      additionalProperties: false
