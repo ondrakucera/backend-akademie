@@ -4,13 +4,7 @@ import { z } from "zod";
 // We validate the raw string and transform it into a Number.
 export const studentIdParamSchema = z
 	.object({
-		id: z
-			.string()
-			.regex(/^\d+$/, { message: "id must be an integer >= 1" })
-			.transform((value) => Number(value))
-			.refine((n) => Number.isInteger(n) && n >= 1, {
-				message: "id must be an integer >= 1",
-			}),
+		id: z.coerce.number().int("id must be an integer").min(1, { message: "id must be an integer >= 1" }),
 	})
 	.strict();
 
